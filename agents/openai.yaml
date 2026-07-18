@@ -1,0 +1,4 @@
+interface:
+  display_name: "Obsidian 通用知识系统"
+  short_description: "检查 Claudian 并搭建可迭代 Obsidian 知识库"
+  default_prompt: "使用 $obsidian-solo-os 初始化：只检查 Claudian 并提供可用 Codex CLI 路径，不新建对话或测试模型；条件满足后搭建可迭代知识库。"

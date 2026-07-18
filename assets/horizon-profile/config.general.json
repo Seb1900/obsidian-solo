@@ -1,0 +1,113 @@
+{
+  "version": "1.0",
+  "ai": {
+    "provider": "deepseek",
+    "model": "deepseek-chat",
+    "base_url": "https://api.deepseek.com",
+    "api_key_env": "DEEPSEEK_API_KEY",
+    "temperature": 0.2,
+    "max_tokens": 4096,
+    "throttle_sec": 0,
+    "analysis_concurrency": 2,
+    "enrichment_concurrency": 1,
+    "languages": ["zh"]
+  },
+  "email": {
+    "enabled": false,
+    "smtp_server": "smtp.qq.com",
+    "smtp_port": 465,
+    "imap_enabled": false,
+    "imap_server": "imap.qq.com",
+    "imap_port": 993,
+    "email_address": "disabled@example.com",
+    "sender_name": "Horizon Daily",
+    "subscribe_keyword": "SUBSCRIBE",
+    "unsubscribe_keyword": "UNSUBSCRIBE"
+  },
+  "sources": {
+    "github": [
+      {"type": "repo_releases", "owner": "openai", "repo": "codex", "enabled": true, "category": "ai-coding"},
+      {"type": "repo_releases", "owner": "obsidianmd", "repo": "obsidian-releases", "enabled": true, "category": "knowledge-tools"},
+      {"type": "repo_releases", "owner": "YishenTu", "repo": "claudian", "enabled": true, "category": "ai-coding"},
+      {"type": "repo_releases", "owner": "Thysrael", "repo": "Horizon", "enabled": true, "category": "knowledge-tools"}
+    ],
+    "hackernews": {
+      "enabled": true,
+      "fetch_top_stories": 30,
+      "min_score": 60,
+      "category": "tech-news"
+    },
+    "rss": [
+      {"name": "OpenAI News", "url": "https://openai.com/news/rss.xml", "enabled": true, "category": "ai-news"},
+      {"name": "Google AI Blog", "url": "https://blog.google/technology/ai/rss/", "enabled": true, "category": "ai-news"},
+      {"name": "Hugging Face Blog", "url": "https://huggingface.co/blog/feed.xml", "enabled": true, "category": "ai-tools"},
+      {"name": "Simon Willison", "url": "https://simonwillison.net/atom/everything/", "enabled": true, "category": "ai-coding"}
+    ],
+    "reddit": {
+      "enabled": true,
+      "subreddits": [
+        {"subreddit": "LocalLLaMA", "enabled": true, "sort": "new", "time_filter": "day", "fetch_limit": 15, "min_score": 5, "category": "ai-news"},
+        {"subreddit": "artificial", "enabled": true, "sort": "new", "time_filter": "day", "fetch_limit": 15, "min_score": 5, "category": "ai-news"}
+      ],
+      "users": [],
+      "fetch_comments": 3
+    },
+    "telegram": {
+      "enabled": true,
+      "channels": [
+        {"channel": "zaihuapd", "enabled": true, "fetch_limit": 20, "category": "ai-news"}
+      ]
+    },
+    "ossinsight": {
+      "enabled": true,
+      "period": "past_24_hours",
+      "languages": ["All", "Python", "TypeScript"],
+      "keywords": ["ai", "technology", "business", "product", "research", "automation"],
+      "min_stars": 10,
+      "max_items": 20,
+      "category": "projects"
+    },
+    "gdelt": {
+      "enabled": true,
+      "query": "technology OR artificial intelligence OR business",
+      "mode": "ArtList",
+      "max_records": 50,
+      "timespan": "24h",
+      "language": null,
+      "country": null,
+      "category": "industry-news"
+    },
+    "google_news": {
+      "enabled": true,
+      "query": "technology OR artificial intelligence OR business OR productivity",
+      "language": "zh-CN",
+      "country": "CN",
+      "ceid": "CN:zh-Hans",
+      "max_results": 60,
+      "category": "industry-news"
+    }
+  },
+  "filtering": {
+    "ai_score_threshold": 6.5,
+    "time_window_hours": 24,
+    "max_items": 24,
+    "category_groups": {
+      "news": {"name": "行业动态", "limit": 10, "categories": ["ai-news", "tech-news", "industry-news"]},
+      "tools": {"name": "工具与项目", "limit": 10, "categories": ["ai-tools", "ai-coding", "projects", "knowledge-tools"]}
+    },
+    "default_group": "other",
+    "default_group_limit": 4
+  },
+  "webhook": {
+    "enabled": false,
+    "url_env": "HORIZON_WEBHOOK_URL",
+    "delivery": "summary",
+    "overview_position": "first",
+    "platform": "generic",
+    "layout": "markdown",
+    "fallback_layout": "markdown",
+    "languages": ["zh"],
+    "request_body": {"text": "#{message_title}\n\n#{summary}"},
+    "headers": ""
+  }
+}
